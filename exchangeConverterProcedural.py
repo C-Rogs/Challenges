@@ -1,13 +1,15 @@
 import requests
 import csv 
 import datetime
+import sys
 
 base_url = "https://openexchangerates.org/api/latest.json"
 app_id = '07e863ba70934494bf190c60aebc7f96'
 file_name = 'day_rates.csv'
 currencies_list = ['AUD','CAD','CHF','CNH','EUR','GBP','HKD','JPY','NZD','USD']
 
-def getRate(currencies,api_key):
+
+def get_rate(currencies,api_key):
     url = base_url+'?app_id='+api_key+'&symbols='+','.join(currencies)
     try:
         response = requests.get(url)
@@ -16,9 +18,9 @@ def getRate(currencies,api_key):
         return response.json()
     except requests.exceptions.HTTPError as err:
         print(err.args[0])
-        return err
+        sys.exit(1)
 
-def csvOut(file_name, currency_data):
+def csv_out(file_name, currency_data):
     with open(file_name, mode='w') as rates_out:
         rates_write = csv.writer(rates_out,  delimiter=',')
         columns = ['Rate Type', 'Date', 'Currency_From', 'Currency_From_Value', 'Currency_To', 'Currency_To_Value']
@@ -28,5 +30,5 @@ def csvOut(file_name, currency_data):
         for currency in currency_data['rates']:
             rates_write.writerow(["Day rate", date, "USD", 1, currency, currency_data['rates'][currency]])
 
-response_dict = getRate(currencies_list,app_id)
-csvOut(file_name,response_dict)
+response_dict = get_rate(currencies_list,app_id)
+csv_out(file_name,response_dict)

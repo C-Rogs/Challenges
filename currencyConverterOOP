@@ -2,8 +2,20 @@ import requests
 import csv
 
 class CSV_Writer():
-    pass
 
+    def __init__(self, file_name):
+        data = requests.get(url).json()     
+        self.rates = data["rates"]
+
+    def write_CSV(file_name, ):
+    with open(file_name, mode='w') as rates_out:
+        rates_write = csv.writer(rates_out,  delimiter=',')
+        columns = ['Rate Type', 'Date', 'Currency_From', 'Currency_From_Value', 'Currency_To', 'Currency_To_Value']
+        date = datetime.datetime.now().strftime("%x")
+
+        rates_write.writerow(columns)
+        for currency in currency_data['rates']:
+            rates_write.writerow(["Day rate", date, "USD", 1, currency, currency_data['rates'][currency]])
 
 class Converter:
     rates = {}

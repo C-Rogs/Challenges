@@ -1,0 +1,11 @@
+Rate Type,Date,Currency_From,Currency_From_Value,Currency_To,Currency_To_Value
+Day rate,02/05/24,USD,1,AUD,1.542521
+Day rate,02/05/24,USD,1,CAD,1.354065
+Day rate,02/05/24,USD,1,CHF,0.870455
+Day rate,02/05/24,USD,1,CNH,7.220155
+Day rate,02/05/24,USD,1,EUR,0.930856
+Day rate,02/05/24,USD,1,GBP,0.797606
+Day rate,02/05/24,USD,1,HKD,7.821626
+Day rate,02/05/24,USD,1,JPY,148.6446
+Day rate,02/05/24,USD,1,NZD,1.651739
+Day rate,02/05/24,USD,1,USD,1
