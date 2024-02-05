@@ -1,0 +1,29 @@
+import requests
+import csv
+
+class CSV_Writer():
+    pass
+
+
+class Converter:
+    rates = {}
+
+    def __init__(self, url):
+        data = requests.get(url).json()     
+        self.rates = data["rates"]
+
+    def convert(self, base, new, amount):
+        initial_amount = amount
+        if base != 'EUR':
+            amount = amount / self.rates[base]
+        amount = round(amount * self.rates[new],2)
+        return str(initial_amount) + " " + base + " = " + str(amount) + " " + new
+
+if __name__ == "__main__":
+    api_key = '07e863ba70934494bf190c60aebc7f96'
+    url = "https://openexchangerates.org/api/latest.json"+'?app_id='+api_key
+    c = Converter(url)
+    base = 'USD'
+    new = input("Country code to convert to: ")
+    amount = int(input("Amount: "))
+    print(c.convert(base,new,amount))
