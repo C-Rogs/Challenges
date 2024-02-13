@@ -1,0 +1,34 @@
+# This method is too slow because it looks at every number k times: O(n*k)
+def rotateA(nums, k):
+    length = len(nums)
+    for i in range(k):
+        end = nums[length - 1]
+        nums.pop(length - 1)
+        nums.insert(0,end)
+    return nums
+
+# This solution is faster because it just moves a value once: O(n) space complexity
+def rotateB(nums, k):
+    copy = [num for num in nums]
+    length = len(nums)
+    for i in range(length):
+        nums[(i + k) % length] = copy[i]
+    return nums
+
+# This solution using python slicing to move the groups of values 
+def rotateC(nums, k):
+    length = len(nums)
+    k %= length 
+    nums[:] = nums[-k:] + nums[:-k]
+    return nums 
+
+
+k = 3
+expected = [5,6,7,1,2,3,4]
+
+nums = [1,2,3,4,5,6,7]
+print(expected == rotateA(nums,k))
+nums = [1,2,3,4,5,6,7]
+print(expected == rotateB(nums,k))
+nums = [1,2,3,4,5,6,7]
+print(expected == rotateC(nums,k))
